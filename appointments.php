@@ -132,6 +132,7 @@ $tablename = $username."appointments";
 			padding: 10px;
 			text-align: center;
 			cursor:pointer;
+			border-radius: 5px;
 		}
 
 		th{
@@ -158,6 +159,103 @@ $tablename = $username."appointments";
 
 		#nextbtnId{
 			float: right;
+		}
+
+		.modal{
+		    display: none;
+		    position: fixed;
+		    z-index: 1;
+		    padding-top: 27vh;
+		    left: 0;
+		    top: 0;
+		    width: 100%;
+		    height: 100%;
+		    overflow: auto;/* Enable scroll if needed */
+		    background-color: rgb(0,0,0); /* Fallback color */
+		    background-color: rgba(0,0,0,0.4);
+		}
+
+		.modal-content{
+		    position: relative;
+		    background-color: #fefefe;
+		    margin: auto;
+		    padding: 0;
+		    border-radius: 10px;
+		    width: 38%;
+		    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+		    -webkit-animation-name: animatetop;
+		    -webkit-animation-duration: 0.4s;
+		    animation-name: animatetop;
+		    animation-duration: 0.4s
+		}
+
+		@-webkit-keyframes animatetop {
+		    from{top:-300px; opacity:0} 
+		    to {top:0; opacity:1}
+		}
+
+		@keyframes animatetop {
+		    from {top:-300px; opacity:0}
+		    to {top:0; opacity:1}
+		}
+
+		.close{
+		    color: white;
+		    float: right;
+		    font-size: 28px;
+		    font-weight: bold;
+		}
+
+		.close:hover,.close:focus{
+		    color: #000;
+		    text-decoration: none;
+		    cursor: pointer;
+		}
+
+		.modal-header{
+			border-radius: 10px;
+		    padding: 2px 16px;
+		    background-color: orange;
+		    color: white;
+		}
+
+		.modal-body{
+			padding: 2px 16px;
+		}
+
+		.inputClass{
+			width: auto;
+			height: auto;
+		}
+
+		#titleInputId{
+			min-width: 100%;
+			min-height: 40px;
+			margin-top: 20px;
+			margin-bottom: 10px;
+			border-radius: 3px;
+			font-family: "Comic Sans MS";
+			font-size: 2em;
+		}
+
+		#descInputId{
+			min-width: 100%;
+			min-height: 100px;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			border-radius: 3px;
+			font-family: "Georgia";
+			font-size: 1.2em;
+			vertical-align: top;
+		}
+
+		#submitInputId{
+			margin-top: 25px;
+			margin-bottom: 10px;
+			margin-left: 48%;
+			border-radius: 3px;
+			font-family: "Sofia";
+			font-size: 1.2em;
 		}
 
 		@media screen and (max-height: 450px) {
@@ -192,10 +290,10 @@ $tablename = $username."appointments";
 			<tbody>
 				<tr id="tr0">
 					<th>Sun</th>
-					<th>Mon</th>
+					<th>M/on</th>
 					<th>Tue</th>
 					<th>Wed</th>
-					<th>thu</th>
+					<th>Thu</th>
 					<th>Fri</th>
 					<th>Sat</th>
 				</tr>
@@ -247,6 +345,27 @@ $tablename = $username."appointments";
 			</tbody>
 		</table>
 	</div>
+	<button class="main" id="myBtn">Add</button>
+	<div class="modal" id="modalId"> 
+		<div class="modal-content">
+			<div class="modal-header">
+				<span class="close" id="modalCloseId">&times;</span>
+				<h2 style="text-align: center; font-size: 1.8em;">Add appointment/event</h2>
+			</div>
+			<div class="modal-body">
+				<div><input id="titleInputId" class="inputClass" type="text" name="title" placeholder="Add title" required/></div>
+				<div><input id="descInputId" class="inputClass" type="text" name="description" placeholder="Add description"/></div>
+				<div style="text-align: center;">
+					<span style="padding: 10px; font-family: Trebuchet MS;">From :</span><input id="appFromId" type="time" name="appFrom" value="10:30" required/>
+					<span style="padding: 10px; font-family: Trebuchet MS;">To :</span><input id="appToId" type="time" name="appTo" value="11:30" required/>
+				</div>	
+				<div><input id="submitInputId" class="inputClass" type="submit" name="appAdd" value="Save"></div>				
+			</div>
+		</div>
+	</div>
+	<div class="main">
+		<div id="todaysTitle">Today's appointments and events</div>
+	</div>
 	<script type="text/javascript">
 		
 		document.getElementById("sidenavId").style.top = document.getElementById("navbar").offsetHeight+"px";
@@ -263,6 +382,24 @@ $tablename = $username."appointments";
 		  } else {
 		    navbar.classList.remove("sticky");
 		  }
+		}
+
+		var modal = document.getElementById('modalId');
+		var btn = document.getElementById("myBtn");
+		var close = document.getElementById("modalCloseId");
+
+		btn.onclick = function() {
+		    modal.style.display = "block";
+		}
+
+		close.onclick = function() {
+		    modal.style.display = "none";
+		}
+
+		window.onclick = function(event) {
+		    if (event.target == modal) {
+		        modal.style.display = "none";
+		    }
 		}
 
 	</script>
