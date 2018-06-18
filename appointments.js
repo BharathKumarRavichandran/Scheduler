@@ -2,6 +2,8 @@ var i=0;
 var j=0;
 var k=0;
 var l=0;
+var oldK=1;
+var oldL=1;
 
 var d;
 var firstDay;
@@ -16,7 +18,10 @@ var currYear;
 var dd=1;
 var mm;
 var yyyy;
+var dayStr = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 var monthStr = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+var modal = document.getElementById('modalId');
 
 function initialise(){
 	d = new Date();
@@ -56,33 +61,61 @@ function endOfMonth(month,year){
 
 }
 
-function calendarInit(firstDay,date,month,year){
+function dayCalculator(firstDay){
 
 	if(firstDay==0){
-		l=0;
+		return 0;
 	}
 	else if(firstDay==1){
-		l=1;	
+		return 1;	
 	}
 	else if(firstDay==2){
-		l=2;	
+		return 2;	
 	}
 	else if(firstDay==3){
-		l=3;	
+		return 3;	
 	}
 	else if(firstDay==4){
-		l=4;	
+		return 4;	
 	}
 	else if(firstDay==5){
-		l=5;	
+		return 5;	
 	}
 	else if(firstDay==6){
-		l=6;	
+		return 6;	
 	}
+
+}
+
+function calendarInit(firstDay,date,month,year){
+
+	l = dayCalculator(firstDay);
 
 	document.getElementById("monthDisplay").innerHTML = monthStr[month];
 	document.getElementById("yearDisplay").innerHTML = year;
 	drawCalendar(l,date,month,year);
+
+}
+
+function dateClickHandler(){
+	
+	k=this.getAttribute("id")[2];
+	l=this.getAttribute("id")[5];
+	this.style.backgroundColor = "#01FF70";
+	this.style.color = "#000";
+	document.getElementById("mmDisp").innerHTML = document.getElementById("monthDisplay").innerHTML;
+	document.getElementById("yyyyDisp").innerHTML = document.getElementById("yearDisplay").innerHTML;
+	document.getElementById("dayDisp").innerHTML = document.getElementById("tr0th"+l).innerHTML;
+	var q = ("0"+document.getElementById("tr"+k+"td"+l).innerHTML).slice(-2);
+	document.getElementById("ddDisp").innerHTML = q;
+
+	if(document.getElementById("tr"+oldK+"td"+oldL).style.backgroundColor!="initial"){
+		document.getElementById("tr"+oldK+"td"+oldL).style.backgroundColor = "initial";
+		document.getElementById("tr"+oldK+"td"+oldL).style.color = "white";
+	}
+
+	oldK=k;
+	oldL=l;
 
 }
 
@@ -92,6 +125,8 @@ function drawCalendar(l,date,month,year){
 		for(i=0;i<7;i++){
 			document.getElementById("tr"+j+"td"+i).style.background = "none";
 			document.getElementById("tr"+j+"td"+i).innerHTML = "";
+			document.getElementById("tr"+j+"td"+i).style.backgroundColor = "initial";
+			document.getElementById("tr"+j+"td"+i).removeEventListener("click",dateClickHandler,false);
 		}
 	}
 
@@ -101,10 +136,15 @@ function drawCalendar(l,date,month,year){
 
 	for(j=1;j<6;j++){
 		for(;i<7;i++){
+
 			document.getElementById("tr"+j+"td"+i).innerHTML = num;
+
 			if(month==currMonth&&year==currYear&&num==currDate){
 				document.getElementById("tr"+j+"td"+i).style.background = "orange";
 			}
+
+			document.getElementById("tr"+j+"td"+i).addEventListener("click",dateClickHandler,false);
+
 			num++;
 			if(num>endOfMonth(month,year)){
 				break;
@@ -146,5 +186,75 @@ document.getElementById("nextbtnId").addEventListener("click",function(){
 	calendarInit(firstDay,dd,mm,yyyy);
 
 },false);
+
+document.getElementById("tdyEventId").addEventListener("click",function(event){
+
+	if(event.target.id!="tdyHeaderId1"&& event.target.id!="tdyHeaderId2"){
+
+		modal.style.display = "block";
+		var u = document.getElementById("ddDisp").innerHTML;
+		var v = monthStr.indexOf(document.getElementById("mmDisp").innerHTML)+1;
+		v = ("0"+v).slice(-2);
+		var z = document.getElementById("yyyyDisp").innerHTML;
+		document.getElementById("dateInputId").value = z+"-"+v+"-"+u;
+
+	}
+
+},false);
+
+function addAppointment(){
+
+	var title = document.getElementById("titleInputId").value;
+	var desc = document.getElementById("descInputId").value;
+	var from = document.getElementById("appFromId").value;
+	var to = document.getElementById("appToId").value;
+
+	createAppBox(title,desc,from,to);
+
+	document.getElementById("titleInputId").value = "";
+	document.getElementById("titleInputId").placeholder = "Add title";
+	document.getElementById("descInputId").value = "";
+	document.getElementById("descInputId").placeholder = "Add description";
+	document.getElementById("appFromId").value = "10:30";
+	document.getElementById("appToId").value = "11:30";
+	modal.style.display = "none";
+}
+
+function createAppBox(title,desc,from,to){
+
+	var li = document.createElement("li");
+	var titleDiv = document.createElement("div");
+	var bodyDiv = document.createElement("div");
+	var descDiv = document.createElement("div");
+	var timingsDiv = document.createElement("div");
+	var fromSpan = document.createElement("span");
+	var toSpan = document.createElement("span");
+
+	var titleText = document.createTextNode(title);
+	var descText = document.createTextNode(desc);
+	var fromText = document.createTextNode("From : "+from);
+	var toText = document.createTextNode(" To : "+to);
+
+	titleDiv.appendChild(titleText);
+	descDiv.appendChild(descText);
+	fromSpan.appendChild(fromText);
+	toSpan.appendChild(toText);
+
+	li.appendChild(titleDiv);
+	bodyDiv.appendChild(descDiv);
+	timingsDiv.appendChild(fromSpan);
+	timingsDiv.appendChild(toSpan);
+	bodyDiv.appendChild(timingsDiv);
+	li.appendChild(bodyDiv);
+	document.getElementById("tdyAppRegion").appendChild(li);
+
+	titleDiv.setAttribute("class","tdyTitleClass");
+	bodyDiv.setAttribute("class","tdyBodyClass");
+	descDiv.setAttribute("class","tdyDescClass");
+	timingsDiv.setAttribute("class","tdyTimingsClass");
+	fromSpan.setAttribute("class","tdyFromClass");
+	toSpan.setAttribute("class","tdyToClass");
+
+}
 
 initialise();

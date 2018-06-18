@@ -135,6 +135,10 @@ $tablename = $username."appointments";
 			border-radius: 5px;
 		}
 
+		.trDateClass{
+			font-weight: 900;
+		}
+
 		th{
 			overflow: hidden;
 			text-align: left;
@@ -176,6 +180,7 @@ $tablename = $username."appointments";
 		}
 
 		.modal-content{
+			overflow: auto;
 		    position: relative;
 		    background-color: #fefefe;
 		    margin: auto;
@@ -231,6 +236,7 @@ $tablename = $username."appointments";
 		#titleInputId{
 			min-width: 100%;
 			min-height: 40px;
+			max-width: 100%;
 			margin-top: 20px;
 			margin-bottom: 10px;
 			border-radius: 3px;
@@ -241,6 +247,7 @@ $tablename = $username."appointments";
 		#descInputId{
 			min-width: 100%;
 			min-height: 100px;
+			max-width: 100%;
 			margin-top: 20px;
 			margin-bottom: 20px;
 			border-radius: 3px;
@@ -256,6 +263,71 @@ $tablename = $username."appointments";
 			border-radius: 3px;
 			font-family: "Sofia";
 			font-size: 1.2em;
+		}
+
+		.flex-container{
+			display: flex;
+			flex-direction: row;
+		}
+
+		.todaysEventsClass{
+			min-width: 40vw;
+			min-height: 50vh;
+			border-style: outset;
+			border-radius: 10px; 
+			padding: 0;
+		}
+
+		li{
+			list-style-type: none;
+		}
+
+		.tdyHeader{
+			background-color: #01FF70;
+			font-family: "Comic Sans MS";
+			font-size: 1.5em;
+			padding: 5px;
+		}
+
+		#tdyTextId{
+			font-family: "Sofia";
+			font-size: 1.2em;
+			padding: 7px;
+			margin-right: 30px;
+		}
+
+		.tdyTitleClass{
+			border-radius: 5px;
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+		    padding: 2px 16px;
+		    background-color: orange;
+		    color: white;
+		    font-family: "Comic Sans MS";
+		    font-size: 1.7em;
+		}
+
+		.tdyBodyClass{
+			overflow: auto;
+			min-height: 70px;
+			font-family: "Trebuchet MS";
+			border-bottom-left-radius: 5px;
+			border-bottom-right-radius: 5px;
+		    padding: 2px 16px;
+		    background-color: #fff;
+		    color: #111;
+		}
+
+		.tdyDescClass{
+			margin-top: 10px;
+			margin-bottom: 10px;
+			font-size: 1.3em;
+		}
+
+		.tdyTimingsClass{
+			font-family: "Trebuchet MS";
+			margin-top: 40px;
+			font-size: 0.9em;
 		}
 
 		@media screen and (max-height: 450px) {
@@ -279,92 +351,108 @@ $tablename = $username."appointments";
 		<a id="appLinkId" class="sidenavlinks active" onclick="appointments()">Appointments</a>
 		<a class="sidenavlinks" onclick="logout()">Logout</a>
 	</div>	
-	<div class="main" class="tableDivClass">
-		<table class="tableClass" border="1">
-			<thead class="month"> 
-				<th id="prevbtnId" class="prev" colspan="1">&#10094;</th>
-				<th id="monthDisplay" colspan="3" style="text-align: center;"></th>
-				<th id="yearDisplay" colspan="2" style="text-align: center;"></th>
-				<th id="nextbtnId" class="next" colspan="1">&#10095;</th>
-			</thead>
-			<tbody>
-				<tr id="tr0">
-					<th>Sun</th>
-					<th>M/on</th>
-					<th>Tue</th>
-					<th>Wed</th>
-					<th>Thu</th>
-					<th>Fri</th>
-					<th>Sat</th>
-				</tr>
-				<tr id="tr1">
-					<td id="tr1td0"></td>
-					<td id="tr1td1"></td>
-					<td id="tr1td2"></td>
-					<td id="tr1td3"></td>
-					<td id="tr1td4"></td>
-					<td id="tr1td5"></td>
-					<td id="tr1td6"></td>
-				</tr>
-				<tr id="tr2">
-					<td id="tr2td0"></td>
-					<td id="tr2td1"></td>
-					<td id="tr2td2"></td>
-					<td id="tr2td3"></td>
-					<td id="tr2td4"></td>
-					<td id="tr2td5"></td>
-					<td id="tr2td6"></td>
-				</tr>
-				<tr id="tr3">
-					<td id="tr3td0"></td>
-					<td id="tr3td1"></td>
-					<td id="tr3td2"></td>
-					<td id="tr3td3"></td>
-					<td id="tr3td4"></td>
-					<td id="tr3td5"></td>
-					<td id="tr3td6"></td>
-				</tr>
-				<tr id="tr4">
-					<td id="tr4td0"></td>
-					<td id="tr4td1"></td>
-					<td id="tr4td2"></td>
-					<td id="tr4td3"></td>
-					<td id="tr4td4"></td>
-					<td id="tr4td5"></td>
-					<td id="tr4td6"></td>
-				</tr>
-				<tr id="tr5">
-					<td id="tr5td0"></td>
-					<td id="tr5td1"></td>
-					<td id="tr5td2"></td>
-					<td id="tr5td3"></td>
-					<td id="tr5td4"></td>
-					<td id="tr5td5"></td>
-					<td id="tr5td6"></td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="flex-container">
+		<div class=" main tableDivClass">
+			<table class="tableClass" border="1">
+				<thead class="month"> 
+					<th id="prevbtnId" class="prev" colspan="1">&#10094;</th>
+					<th id="monthDisplay" colspan="3" style="text-align: center;"></th>
+					<th id="yearDisplay" colspan="2" style="text-align: center;"></th>
+					<th id="nextbtnId" class="next" colspan="1">&#10095;</th>
+				</thead>
+				<tbody>
+					<tr id="tr0">
+						<th id="tr0th0">Sun</th>
+						<th id="tr0th1">Mon</th>
+						<th id="tr0th2">Tue</th>
+						<th id="tr0th3">Wed</th>
+						<th id="tr0th4">Thu</th>
+						<th id="tr0th5">Fri</th>
+						<th id="tr0th6">Sat</th>
+					</tr>
+					<tr id="tr1" class="trDateClass">
+						<td id="tr1td0"></td>
+						<td id="tr1td1"></td>
+						<td id="tr1td2"></td>
+						<td id="tr1td3"></td>
+						<td id="tr1td4"></td>
+						<td id="tr1td5"></td>
+						<td id="tr1td6"></td>
+					</tr>
+					<tr id="tr2" class="trDateClass">
+						<td id="tr2td0"></td>
+						<td id="tr2td1"></td>
+						<td id="tr2td2"></td>
+						<td id="tr2td3"></td>
+						<td id="tr2td4"></td>
+						<td id="tr2td5"></td>
+						<td id="tr2td6"></td>
+					</tr>
+					<tr id="tr3" class="trDateClass">
+						<td id="tr3td0"></td>
+						<td id="tr3td1"></td>
+						<td id="tr3td2"></td>
+						<td id="tr3td3"></td>
+						<td id="tr3td4"></td>
+						<td id="tr3td5"></td>
+						<td id="tr3td6"></td>
+					</tr>
+					<tr id="tr4" class="trDateClass">
+						<td id="tr4td0"></td>
+						<td id="tr4td1"></td>
+						<td id="tr4td2"></td>
+						<td id="tr4td3"></td>
+						<td id="tr4td4"></td>
+						<td id="tr4td5"></td>
+						<td id="tr4td6"></td>
+					</tr>
+					<tr id="tr5" class="trDateClass">
+						<td id="tr5td0"></td>
+						<td id="tr5td1"></td>
+						<td id="tr5td2"></td>
+						<td id="tr5td3"></td>
+						<td id="tr5td4"></td>
+						<td id="tr5td5"></td>
+						<td id="tr5td6"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="main todaysEventsClass" id="tdyEventId">
+			<div id="tdyHeaderId1" class="tdyHeader">
+				<span id="tdyTextId">Appointments</span>
+				<span id="mmDisp">June</span>
+				<span id="yyyyDisp">2018</span>
+			</div>
+			<div id="tdyHeaderId2" class="tdyHeader" style="margin-bottom: 10px;">
+				<span id="dayDisp">Mon</span>
+				<span id="ddDisp">18</span>
+			</div>
+			<div id="tdyAppRegion"></div>
+		</div>
 	</div>
-	<button class="main" id="myBtn">Add</button>
 	<div class="modal" id="modalId"> 
 		<div class="modal-content">
 			<div class="modal-header">
 				<span class="close" id="modalCloseId">&times;</span>
 				<h2 style="text-align: center; font-size: 1.8em;">Add appointment/event</h2>
+				<div>
+					<span>Date : </span>
+					<input id="dateInputId" type="date" name="date">
+				</div>
 			</div>
 			<div class="modal-body">
-				<div><input id="titleInputId" class="inputClass" type="text" name="title" placeholder="Add title" required/></div>
-				<div><input id="descInputId" class="inputClass" type="text" name="description" placeholder="Add description"/></div>
-				<div style="text-align: center;">
-					<span style="padding: 10px; font-family: Trebuchet MS;">From :</span><input id="appFromId" type="time" name="appFrom" value="10:30" required/>
-					<span style="padding: 10px; font-family: Trebuchet MS;">To :</span><input id="appToId" type="time" name="appTo" value="11:30" required/>
-				</div>	
-				<div><input id="submitInputId" class="inputClass" type="submit" name="appAdd" value="Save"></div>				
+				<form action="appointments.php" method="POST">
+					<div><input id="titleInputId" class="inputClass" type="text" name="title" placeholder="Add title" required/></div>
+					<div><input id="descInputId" class="inputClass" type="text" name="description" placeholder="Add description"/></div>
+					<div style="text-align: center;">
+						<span style="padding: 10px; font-family: Trebuchet MS;">From :</span><input id="appFromId" type="time" name="appFrom" value="10:30" required/>
+						<span style="padding: 10px; font-family: Trebuchet MS;">To :</span><input id="appToId" type="time" name="appTo" value="11:30" required/>
+					</div>	
+					<div><input id="submitInputId" class="inputClass" type="submit" name="appAdd" value="Save" onclick="addAppointment();"></div>
+				</form>			
 			</div>
 		</div>
-	</div>
-	<div class="main">
-		<div id="todaysTitle">Today's appointments and events</div>
 	</div>
 	<script type="text/javascript">
 		
@@ -385,12 +473,7 @@ $tablename = $username."appointments";
 		}
 
 		var modal = document.getElementById('modalId');
-		var btn = document.getElementById("myBtn");
 		var close = document.getElementById("modalCloseId");
-
-		btn.onclick = function() {
-		    modal.style.display = "block";
-		}
 
 		close.onclick = function() {
 		    modal.style.display = "none";
