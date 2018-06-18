@@ -111,6 +111,55 @@ $tablename = $username."appointments";
 		    color: black;
 		}
 
+		.tableClass,tr{
+			color: white;
+		}
+
+		#prevbtnId,#nextbtnId{
+			color: white;
+			font-size: 40px;
+		}
+
+		table{
+			table-layout: auto;
+    		border-radius: 10px;
+    		margin-left: 3%;
+    		box-shadow: 0 1px 2px 0 rgba(255,255,255,.55);
+		}
+
+		td{
+			overflow: hidden;
+			padding: 10px;
+			text-align: center;
+			cursor:pointer;
+		}
+
+		th{
+			overflow: hidden;
+			text-align: left;
+			padding: 10px;
+			padding-left: 5px;
+		}
+
+		thead th{
+			box-shadow: none;
+			font-size: 1.6em;
+			border: 0;
+			border-style: hidden;
+		}
+
+		.month{
+			cursor:pointer;
+		}
+
+		#prevbtnId{
+			float: left;
+		}
+
+		#nextbtnId{
+			float: right;
+		}
+
 		@media screen and (max-height: 450px) {
 		    .sidenav {
 		    	padding-top: 15px;
@@ -132,6 +181,72 @@ $tablename = $username."appointments";
 		<a id="appLinkId" class="sidenavlinks active" onclick="appointments()">Appointments</a>
 		<a class="sidenavlinks" onclick="logout()">Logout</a>
 	</div>	
+	<div class="main" class="tableDivClass">
+		<table class="tableClass" border="1">
+			<thead class="month"> 
+				<th id="prevbtnId" class="prev" colspan="1">&#10094;</th>
+				<th id="monthDisplay" colspan="3" style="text-align: center;"></th>
+				<th id="yearDisplay" colspan="2" style="text-align: center;"></th>
+				<th id="nextbtnId" class="next" colspan="1">&#10095;</th>
+			</thead>
+			<tbody>
+				<tr id="tr0">
+					<th>Sun</th>
+					<th>Mon</th>
+					<th>Tue</th>
+					<th>Wed</th>
+					<th>thu</th>
+					<th>Fri</th>
+					<th>Sat</th>
+				</tr>
+				<tr id="tr1">
+					<td id="tr1td0"></td>
+					<td id="tr1td1"></td>
+					<td id="tr1td2"></td>
+					<td id="tr1td3"></td>
+					<td id="tr1td4"></td>
+					<td id="tr1td5"></td>
+					<td id="tr1td6"></td>
+				</tr>
+				<tr id="tr2">
+					<td id="tr2td0"></td>
+					<td id="tr2td1"></td>
+					<td id="tr2td2"></td>
+					<td id="tr2td3"></td>
+					<td id="tr2td4"></td>
+					<td id="tr2td5"></td>
+					<td id="tr2td6"></td>
+				</tr>
+				<tr id="tr3">
+					<td id="tr3td0"></td>
+					<td id="tr3td1"></td>
+					<td id="tr3td2"></td>
+					<td id="tr3td3"></td>
+					<td id="tr3td4"></td>
+					<td id="tr3td5"></td>
+					<td id="tr3td6"></td>
+				</tr>
+				<tr id="tr4">
+					<td id="tr4td0"></td>
+					<td id="tr4td1"></td>
+					<td id="tr4td2"></td>
+					<td id="tr4td3"></td>
+					<td id="tr4td4"></td>
+					<td id="tr4td5"></td>
+					<td id="tr4td6"></td>
+				</tr>
+				<tr id="tr5">
+					<td id="tr5td0"></td>
+					<td id="tr5td1"></td>
+					<td id="tr5td2"></td>
+					<td id="tr5td3"></td>
+					<td id="tr5td4"></td>
+					<td id="tr5td5"></td>
+					<td id="tr5td6"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 	<script type="text/javascript">
 		
 		document.getElementById("sidenavId").style.top = document.getElementById("navbar").offsetHeight+"px";
@@ -152,7 +267,6 @@ $tablename = $username."appointments";
 
 	</script>
 <script src="functions.js"></script>	
-<script src="appointments.js">
-</script>
+<script src="appointments.js"></script>
 </body>
 </html>
