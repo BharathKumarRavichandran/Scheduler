@@ -280,7 +280,6 @@ $tablename = $username."appointments";
 
 		.todaysEventsClass{
 			min-width: 40vw;
-			min-height: 50vh;
 			border-style: outset;
 			border-radius: 10px; 
 			padding: 0;
@@ -327,7 +326,7 @@ $tablename = $username."appointments";
 
 		.tdyBodyClass{
 			overflow: auto;
-			min-height: 70px;
+			min-height: 50px;
 			font-family: "Trebuchet MS";
 			border-bottom-left-radius: 5px;
 			border-bottom-right-radius: 5px;
@@ -344,12 +343,18 @@ $tablename = $username."appointments";
 
 		.tdyTimingsClass{
 			font-family: "Trebuchet MS";
+			font-style: italic;
 			margin-top: 40px;
+			font-weight: 600;
 			font-size: 0.9em;
 		}
 
+		.tdyToClass{
+			margin-left: 10px;
+		}
+
 		#tdyAppRegion{
-			margin-bottom: 80px;
+			margin-bottom: 20px;
 		}
 
 		#clickHereId{
@@ -357,7 +362,8 @@ $tablename = $username."appointments";
 			font-size: 1.2em;
 			color: yellow;
 			text-align: center;
-			margin-bottom: 30px;
+			padding-top: 30px;
+			padding-bottom: 30px;
 		}
 
 		@media screen and (max-height: 450px) {
