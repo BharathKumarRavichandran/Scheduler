@@ -330,6 +330,10 @@ $tablename = $username."appointments";
 			font-size: 0.9em;
 		}
 
+		#tdyAppRegion{
+			margin-bottom: 60px;
+		}
+
 		@media screen and (max-height: 450px) {
 		    .sidenav {
 		    	padding-top: 15px;
@@ -345,12 +349,12 @@ $tablename = $username."appointments";
 	<div id="navbar" class="topnav">
 		<a onclick="home()"><h2 class="title">Scheduler</h2></a>
 	</div>
-	<div><?= $_SESSION['message'] ?></div>
 	<div class="sidenav" id="sidenavId">
 		<a class="home sidenavlinks" onclick="home()">Home</a>
 		<a id="appLinkId" class="sidenavlinks active" onclick="appointments()">Appointments</a>
 		<a class="sidenavlinks" onclick="logout()">Logout</a>
 	</div>	
+	<div class="main"><?php echo $_SESSION['message'] ?></div>
 	<div class="flex-container">
 		<div class=" main tableDivClass">
 			<table class="tableClass" border="1">
@@ -421,12 +425,12 @@ $tablename = $username."appointments";
 		<div class="main todaysEventsClass" id="tdyEventId">
 			<div id="tdyHeaderId1" class="tdyHeader">
 				<span id="tdyTextId">Appointments</span>
-				<span id="mmDisp">June</span>
-				<span id="yyyyDisp">2018</span>
+				<span id="mmDisp"></span>
+				<span id="yyyyDisp"></span>
 			</div>
 			<div id="tdyHeaderId2" class="tdyHeader" style="margin-bottom: 10px;">
-				<span id="dayDisp">Mon</span>
-				<span id="ddDisp">18</span>
+				<span id="dayDisp"></span>
+				<span id="ddDisp"></span>
 			</div>
 			<div id="tdyAppRegion"></div>
 		</div>
@@ -438,19 +442,18 @@ $tablename = $username."appointments";
 				<h2 style="text-align: center; font-size: 1.8em;">Add appointment/event</h2>
 				<div>
 					<span>Date : </span>
-					<input id="dateInputId" type="date" name="date">
+					<input id="dateInputId" type="date" name="appDate">
 				</div>
 			</div>
 			<div class="modal-body">
-				<form action="appointments.php" method="POST">
-					<div><input id="titleInputId" class="inputClass" type="text" name="title" placeholder="Add title" required/></div>
+					
+					<div><input id="titleInputId" class="inputClass" type="text" name="title" placeholder="Add title"/></div>
 					<div><input id="descInputId" class="inputClass" type="text" name="description" placeholder="Add description"/></div>
 					<div style="text-align: center;">
-						<span style="padding: 10px; font-family: Trebuchet MS;">From :</span><input id="appFromId" type="time" name="appFrom" value="10:30" required/>
-						<span style="padding: 10px; font-family: Trebuchet MS;">To :</span><input id="appToId" type="time" name="appTo" value="11:30" required/>
+						<span style="padding: 10px; font-family: Trebuchet MS;">From :</span><input id="appFromId" type="time" name="appFrom" value="10:30"/>
+						<span style="padding: 10px; font-family: Trebuchet MS;">To :</span><input id="appToId" type="time" name="appTo" value="11:30"/>
 					</div>	
-					<div><input id="submitInputId" class="inputClass" type="submit" name="appAdd" value="Save" onclick="addAppointment();"></div>
-				</form>			
+					<div><input id="submitInputId" class="inputClass" type="submit" name="appAdd" value="Save" onclick="addAppointment();"></div>			
 			</div>
 		</div>
 	</div>
