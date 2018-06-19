@@ -69,7 +69,7 @@ $tablename = $username."appointments";
 		}
 
 		.main{
-			margin-top: 50px;
+			margin-top: 90px;
 		    margin-left: 240px;
 		    padding: 0px 10px;
 		}
@@ -116,15 +116,20 @@ $tablename = $username."appointments";
 		}
 
 		#prevbtnId,#nextbtnId{
-			color: white;
+			color: orange;
 			font-size: 40px;
+		}
+
+		#monthDisplay,#yearDisplay{
+			color: orange;
 		}
 
 		table{
 			table-layout: auto;
     		border-radius: 10px;
-    		margin-left: 3%;
+    		margin-left: 17%;
     		box-shadow: 0 1px 2px 0 rgba(255,255,255,.55);
+    		background-color: #fff;
 		}
 
 		td{
@@ -133,6 +138,7 @@ $tablename = $username."appointments";
 			text-align: center;
 			cursor:pointer;
 			border-radius: 5px;
+			color: #333;
 		}
 
 		.trDateClass{
@@ -144,6 +150,8 @@ $tablename = $username."appointments";
 			text-align: left;
 			padding: 10px;
 			padding-left: 5px;
+			font-weight: 900;
+			color: darkblue;
 		}
 
 		thead th{
@@ -279,7 +287,16 @@ $tablename = $username."appointments";
 		}
 
 		li{
-			list-style-type: none;
+			list-style-type: none;	
+		}
+
+		.tdyLiClass{
+			padding-left: 20px;
+			padding-right: 20px; 
+		}
+
+		.tdyLiClass:hover{
+			transform: scale(1.05);
 		}
 
 		.tdyHeader{
@@ -297,6 +314,7 @@ $tablename = $username."appointments";
 		}
 
 		.tdyTitleClass{
+			margin-top: 20px;
 			border-radius: 5px;
 			border-bottom-left-radius: 0;
 			border-bottom-right-radius: 0;
@@ -331,7 +349,15 @@ $tablename = $username."appointments";
 		}
 
 		#tdyAppRegion{
-			margin-bottom: 60px;
+			margin-bottom: 80px;
+		}
+
+		#clickHereId{
+			font-family: "Sofia";
+			font-size: 1.2em;
+			color: yellow;
+			text-align: center;
+			margin-bottom: 30px;
 		}
 
 		@media screen and (max-height: 450px) {
@@ -359,10 +385,10 @@ $tablename = $username."appointments";
 		<div class=" main tableDivClass">
 			<table class="tableClass" border="1">
 				<thead class="month"> 
-					<th id="prevbtnId" class="prev" colspan="1">&#10094;</th>
+					<th id="prevbtnId" class="prev" colspan="1"><i class="fa fa-chevron-circle-left"></i></th>
 					<th id="monthDisplay" colspan="3" style="text-align: center;"></th>
 					<th id="yearDisplay" colspan="2" style="text-align: center;"></th>
-					<th id="nextbtnId" class="next" colspan="1">&#10095;</th>
+					<th id="nextbtnId" class="next" colspan="1"><i class="fa fa-chevron-circle-right"></i></th>
 				</thead>
 				<tbody>
 					<tr id="tr0">
@@ -428,11 +454,12 @@ $tablename = $username."appointments";
 				<span id="mmDisp"></span>
 				<span id="yyyyDisp"></span>
 			</div>
-			<div id="tdyHeaderId2" class="tdyHeader" style="margin-bottom: 10px;">
+			<div id="tdyHeaderId2" class="tdyHeader">
 				<span id="dayDisp"></span>
 				<span id="ddDisp"></span>
 			</div>
 			<div id="tdyAppRegion"></div>
+			<div id="clickHereId">Click here to add appointments</div>
 		</div>
 	</div>
 	<div class="modal" id="modalId"> 

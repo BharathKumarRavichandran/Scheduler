@@ -328,6 +328,7 @@ function createAppBox(title,desc,from,to){
 	li.appendChild(bodyDiv);
 	document.getElementById("tdyAppRegion").appendChild(li);
 
+	li.setAttribute("class","tdyLiClass");
 	titleDiv.setAttribute("class","tdyTitleClass");
 	bodyDiv.setAttribute("class","tdyBodyClass");
 	descDiv.setAttribute("class","tdyDescClass");
