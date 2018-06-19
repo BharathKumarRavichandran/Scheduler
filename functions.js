@@ -17,6 +17,10 @@ function appointments(){
 	window.location = "appointments.php";
 }
 
+function invites(){
+	window.location = "invites.php";
+}
+
 function logout(){
 	window.location = "logout.php";
 }
