@@ -21,7 +21,16 @@ var yyyy;
 var dayStr = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 var monthStr = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-var modal = document.getElementById('modalId');
+var xmlhttp;
+if (window.XMLHttpRequest) {
+  		xmlhttp = new XMLHttpRequest();
+} 
+ else{
+  	xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+var modal = document.getElementById("modalId");
+var tdyAppRegion = document.getElementById("tdyAppRegion");
 
 function initialise(){
 	d = new Date();
@@ -33,7 +42,48 @@ function initialise(){
 	mm=d.getMonth();
 	yyyy=d.getFullYear();
 	firstDay = new Date(yyyy,mm,dd).getDay();
+
 	calendarInit(firstDay,1,currMonth,currYear);
+
+	document.getElementById("mmDisp").innerHTML = monthStr[currMonth];
+	document.getElementById("yyyyDisp").innerHTML = currYear;
+	document.getElementById("dayDisp").innerHTML = dayStr[currDay];
+	var q = ("0"+currDate).slice(-2);
+	document.getElementById("ddDisp").innerHTML = q;
+
+	var u = currDate;
+	var v = currMonth+1;
+	v = ("0"+v).slice(-2);
+	var z = currYear;
+	var appDate = z+"-"+v+"-"+u;
+
+	getAppointmentData(appDate);
+
+}
+
+function getAppointmentData(appDate){
+	
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+	  		xmlhttp = new XMLHttpRequest();
+	} 
+	 else{
+	  	xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	var params="appDate="+appDate;
+	var data;
+	xmlhttp.onreadystatechange = function(){
+	    if(this.readyState==4&&this.status==200){
+	    	data = JSON.parse(this.responseText);	
+	    	for(i=0;i<data.length;i++){
+	    		createAppBox(data[i].Title,data[i].Description,data[i].FromTime,data[i].ToTime);
+	    	}	
+	    }
+	};
+	xmlhttp.open("POST","getAppointmentData.php",true);
+	xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+	xmlhttp.send(params);
+
 }
 
 function leapYearCheck(year){
@@ -99,19 +149,28 @@ function calendarInit(firstDay,date,month,year){
 
 function dateClickHandler(){
 	
+	while(tdyAppRegion.firstChild){ //To remove the childs of Appointment Region
+    	tdyAppRegion.removeChild(tdyAppRegion.firstChild);
+	}
+
 	k=this.getAttribute("id")[2];
 	l=this.getAttribute("id")[5];
 	this.style.backgroundColor = "#01FF70";
-	this.style.color = "#000";
 	document.getElementById("mmDisp").innerHTML = document.getElementById("monthDisplay").innerHTML;
 	document.getElementById("yyyyDisp").innerHTML = document.getElementById("yearDisplay").innerHTML;
 	document.getElementById("dayDisp").innerHTML = document.getElementById("tr0th"+l).innerHTML;
 	var q = ("0"+document.getElementById("tr"+k+"td"+l).innerHTML).slice(-2);
 	document.getElementById("ddDisp").innerHTML = q;
+	var u = document.getElementById("ddDisp").innerHTML;
+	var v = monthStr.indexOf(document.getElementById("mmDisp").innerHTML)+1;
+	v = ("0"+v).slice(-2);
+	var z = document.getElementById("yyyyDisp").innerHTML;
+	var appDate = z+"-"+v+"-"+u;
+
+	getAppointmentData(appDate);
 
 	if(document.getElementById("tr"+oldK+"td"+oldL).style.backgroundColor!="initial"){
 		document.getElementById("tr"+oldK+"td"+oldL).style.backgroundColor = "initial";
-		document.getElementById("tr"+oldK+"td"+oldL).style.color = "white";
 	}
 
 	oldK=k;
@@ -204,12 +263,14 @@ document.getElementById("tdyEventId").addEventListener("click",function(event){
 
 function addAppointment(){
 
+	var appDate = document.getElementById("dateInputId").value;
 	var title = document.getElementById("titleInputId").value;
 	var desc = document.getElementById("descInputId").value;
 	var from = document.getElementById("appFromId").value;
 	var to = document.getElementById("appToId").value;
 
 	createAppBox(title,desc,from,to);
+	addAppointmentDb(appDate,title,desc,from,to);
 
 	document.getElementById("titleInputId").value = "";
 	document.getElementById("titleInputId").placeholder = "Add title";
@@ -218,6 +279,25 @@ function addAppointment(){
 	document.getElementById("appFromId").value = "10:30";
 	document.getElementById("appToId").value = "11:30";
 	modal.style.display = "none";
+}
+
+function addAppointmentDb(appDate,title,desc,from,to){
+
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+	  		xmlhttp = new XMLHttpRequest();
+	} 
+	 else{
+	  	xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	var url="saveAppointmentData.php";
+	var purpose = "add";
+	var params = "appDate="+appDate+"&title="+title+"&description="+desc+"&appFrom="+from+"&appTo="+to+"&purpose="+purpose;
+	
+	xmlhttp.open('POST',url,true);
+	xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+	xmlhttp.send(params);
+
 }
 
 function createAppBox(title,desc,from,to){
