@@ -94,7 +94,7 @@ $_SESSION['message']="";
 	</style>
 </head>
 <body>
-	<a onclick="home()"><h1 class="title">Clippy</h1></a>
+	<a onclick="home()"><h1 class="title">Scheduler</h1></a>
 	<div class="tagline">A web app to create and manage appointments</div>
 	<span id="appButtonContainer"><a onclick="appointments()">Appointments</a></span>
 	<span id="logoutButtonContainer"><a onclick="logout()">Logout</a></span>	
