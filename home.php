@@ -54,12 +54,26 @@ $_SESSION['message']="";
 			font-size: 2.5em;
 			padding: 1.1%;
 			margin: 2%;
-			margin-left: 25%;
-			width: 15%;
-
+			margin-left: 16%;
+			min-width: 15%;
 		}
 
 		#appButtonContainer:hover{
+			transform: scale(1.2);
+		}
+
+		#invitesButtonContainer{
+			display: inline-block;
+			background: #111111;
+			color: orange;
+			font-size: 2.5em;
+			padding: 1.1%;
+			margin: 2%;
+			margin-left: 10%;
+			min-width: 7%;
+		}
+
+		#invitesButtonContainer:hover{
 			transform: scale(1.2);
 		}
 
@@ -71,7 +85,7 @@ $_SESSION['message']="";
 			padding: 1.2%;
 			margin: 2%;
 			margin-left: 10%;
-			width: 7%;
+			min-width: 7%;
 		}
 
 		#logoutButtonContainer:hover{
@@ -97,6 +111,7 @@ $_SESSION['message']="";
 	<a onclick="home()"><h1 class="title">Scheduler</h1></a>
 	<div class="tagline">A web app to create and manage appointments</div>
 	<span id="appButtonContainer"><a onclick="appointments()">Appointments</a></span>
+	<span id="invitesButtonContainer"><a onclick="invites()">Invites</a></span>
 	<span id="logoutButtonContainer"><a onclick="logout()">Logout</a></span>	
 	<div class="sessionDisplay">
 		<div class="userDisplay"><?php echo "User : ".$_SESSION["username"]; ?></div>
