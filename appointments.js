@@ -253,18 +253,14 @@ document.getElementById("nextbtnId").addEventListener("click",function(){
 
 },false);
 
-document.getElementById("tdyEventId").addEventListener("click",function(event){
+document.getElementById("clickHereId").addEventListener("click",function(event){
 
-	if(event.target.id!="tdyHeaderId1"&& event.target.id!="tdyHeaderId2"){
-
-		modal.style.display = "block";
-		var u = document.getElementById("ddDisp").innerHTML;
-		var v = monthStr.indexOf(document.getElementById("mmDisp").innerHTML)+1;
-		v = ("0"+v).slice(-2);
-		var z = document.getElementById("yyyyDisp").innerHTML;
-		document.getElementById("dateInputId").value = z+"-"+v+"-"+u;
-
-	}
+	modal.style.display = "block";
+	var u = document.getElementById("ddDisp").innerHTML;
+	var v = monthStr.indexOf(document.getElementById("mmDisp").innerHTML)+1;
+	v = ("0"+v).slice(-2);
+	var z = document.getElementById("yyyyDisp").innerHTML;
+	document.getElementById("dateInputId").value = z+"-"+v+"-"+u;
 
 },false);
 
