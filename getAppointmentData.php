@@ -25,9 +25,11 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 	if($result->num_rows>0){
 		while($row = $result->fetch_assoc()){
 
-			$r = array('AppointmentDate'=>$row["AppointmentDate"],'Title'=>$row["Title"],'Description'=>$row["Description"],'FromTime'=>$row["FromTime"],'ToTime'=>$row["ToTime"]);
+			if($row["Status"]=="Accepted"){
+				$r = array('AppointmentDate'=>$row["AppointmentDate"],'Title'=>$row["Title"],'Description'=>$row["Description"],'FromTime'=>$row["FromTime"],'ToTime'=>$row["ToTime"]);
 
-			array_push($userAppData,$r);
+				array_push($userAppData,$r);
+			}	
 		}
 	}	
 	echo json_encode($userAppData);
