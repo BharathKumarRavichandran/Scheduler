@@ -170,7 +170,14 @@ function dateClickHandler(){
 	getAppointmentData(appDate);
 
 	if(document.getElementById("tr"+oldK+"td"+oldL).style.backgroundColor!="initial"){
-		document.getElementById("tr"+oldK+"td"+oldL).style.backgroundColor = "initial";
+		if(document.getElementById("tr"+oldK+"td"+oldL).style.backgroundColor!="orange"){
+			document.getElementById("tr"+oldK+"td"+oldL).style.backgroundColor = "initial";
+		}
+	}
+
+	if(currMonth==monthStr.indexOf(document.getElementById("monthDisplay").innerHTML)&&document.getElementById("yearDisplay").innerHTML==currYear&&u==currDate){
+		document.getElementById("tr"+k+"td"+l).style.background = "orange";
+		console.log("hey");
 	}
 
 	oldK=k;
