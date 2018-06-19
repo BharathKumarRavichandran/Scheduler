@@ -264,6 +264,18 @@ $tablename = $username."appointments";
 			vertical-align: top;
 		}
 
+		#inviteTextSpan{
+			font-size: 1.1em;
+		}
+
+		#inviteInputId{
+			border-radius: 3px;
+			font-family: "Comic Sans MS";
+			font-size: 1.1em;
+			margin-top: 10px;
+			margin-bottom: 20px;
+		}
+
 		#submitInputId{
 			margin-top: 25px;
 			margin-bottom: 10px;
@@ -384,6 +396,7 @@ $tablename = $username."appointments";
 	<div class="sidenav" id="sidenavId">
 		<a class="home sidenavlinks" onclick="home()">Home</a>
 		<a id="appLinkId" class="sidenavlinks active" onclick="appointments()">Appointments</a>
+		<a class="sidenavlinks" onclick="invites()">Invites</a>
 		<a class="sidenavlinks" onclick="logout()">Logout</a>
 	</div>	
 	<div class="main"><?php echo $_SESSION['message'] ?></div>
@@ -482,6 +495,12 @@ $tablename = $username."appointments";
 					
 					<div><input id="titleInputId" class="inputClass" type="text" name="title" placeholder="Add title"/></div>
 					<div><input id="descInputId" class="inputClass" type="text" name="description" placeholder="Add description"/></div>
+					<div>
+						<span id="inviteTextSpan">Add Guests :</span>
+						<input id="inviteInputId" type="text" name="invitee" placeholder="Username">
+						<button id="inviteeAdd">Add</button>
+					</div>
+					<div id="inviteeAppendRegion"></div>
 					<div style="text-align: center;">
 						<span style="padding: 10px; font-family: Trebuchet MS;">From :</span><input id="appFromId" type="time" name="appFrom" value="10:30"/>
 						<span style="padding: 10px; font-family: Trebuchet MS;">To :</span><input id="appToId" type="time" name="appTo" value="11:30"/>
@@ -510,9 +529,15 @@ $tablename = $username."appointments";
 
 		var modal = document.getElementById('modalId');
 		var close = document.getElementById("modalCloseId");
+		var inviteeAppendRegion = document.getElementById("inviteeAppendRegion");
 
 		close.onclick = function() {
 		    modal.style.display = "none";
+		    while(inviteeAppendRegion.firstChild){ //To remove the childs of Invitee username Region
+    			inviteeAppendRegion.removeChild(inviteeAppendRegion.firstChild);
+			}
+			document.getElementById("inviteInputId").value = "";
+			document.getElementById("inviteInputId").placeholder = "Username";
 		}
 
 		window.onclick = function(event) {
