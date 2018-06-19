@@ -21,6 +21,8 @@ var yyyy;
 var dayStr = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 var monthStr = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
+var inviteeStr = "";
+
 var xmlhttp;
 if (window.XMLHttpRequest) {
   		xmlhttp = new XMLHttpRequest();
@@ -177,7 +179,6 @@ function dateClickHandler(){
 
 	if(currMonth==monthStr.indexOf(document.getElementById("monthDisplay").innerHTML)&&document.getElementById("yearDisplay").innerHTML==currYear&&u==currDate){
 		document.getElementById("tr"+k+"td"+l).style.background = "orange";
-		console.log("hey");
 	}
 
 	oldK=k;
@@ -255,12 +256,32 @@ document.getElementById("nextbtnId").addEventListener("click",function(){
 
 document.getElementById("clickHereId").addEventListener("click",function(event){
 
+	inviteeStr = "";
 	modal.style.display = "block";
 	var u = document.getElementById("ddDisp").innerHTML;
 	var v = monthStr.indexOf(document.getElementById("mmDisp").innerHTML)+1;
 	v = ("0"+v).slice(-2);
 	var z = document.getElementById("yyyyDisp").innerHTML;
 	document.getElementById("dateInputId").value = z+"-"+v+"-"+u;
+
+},false);
+
+document.getElementById("inviteInputId").addEventListener("keyup",function(event){//Function to listen for enter keyup at InviteeInput
+
+	if(event.keyCode==13){//enter keyCode
+		if(document.getElementById("inviteInputId").value!=""){
+			newInvitee();
+		}	
+	}
+
+},false);
+
+document.getElementById("inviteeAdd").addEventListener("click",function(event){
+
+	console.log(document.getElementById("inviteInputId").value);
+	if(document.getElementById("inviteInputId").value!=""){
+		newInvitee();
+	}	
 
 },false);
 
@@ -282,6 +303,10 @@ function addAppointment(){
 	document.getElementById("appFromId").value = "10:30";
 	document.getElementById("appToId").value = "11:30";
 	modal.style.display = "none";
+
+	while(inviteeAppendRegion.firstChild){ //To remove the childs of Invitee username Region
+    	inviteeAppendRegion.removeChild(inviteeAppendRegion.firstChild);
+	}
 }
 
 function addAppointmentDb(appDate,title,desc,from,to){
@@ -295,12 +320,29 @@ function addAppointmentDb(appDate,title,desc,from,to){
 	}
 	var url="saveAppointmentData.php";
 	var purpose = "add";
-	var params = "appDate="+appDate+"&title="+title+"&description="+desc+"&appFrom="+from+"&appTo="+to+"&purpose="+purpose;
+	var params = "appDate="+appDate+"&title="+title+"&description="+desc+"&appFrom="+from+"&appTo="+to+"&inviteeStr="+inviteeStr+"&purpose="+purpose;
 	
 	xmlhttp.open('POST',url,true);
 	xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 	xmlhttp.send(params);
 
+}
+
+function newInvitee(){
+
+	var invitee = document.getElementById("inviteInputId").value;
+	inviteeStr+=invitee+" ";
+
+	var span = document.createElement("span");
+	var spanText = document.createTextNode(invitee);
+
+	span.appendChild(spanText);
+	document.getElementById("inviteeAppendRegion").appendChild(span);
+
+	span.setAttribute("class","inviteeSpanClass");
+
+	document.getElementById("inviteInputId").value = "";
+	document.getElementById("inviteInputId").placeholder = "Username";
 }
 
 function createAppBox(title,desc,from,to){
