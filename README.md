@@ -11,11 +11,15 @@ This project uses PHP, Javascript, HTML, CSS and AJAX requests.
 * Users can schedule meetings with others. This will send an invite to the other user and let them add it to their own calendars.
 * Meeting invites page , which will update with any new notifications without having to refresh.
 * Sign up process with real time indication of usernames availability and a Captcha.
+
 ----
+
 **Framework used : PHP on Apache**  
 **Database 	 : MySQL**  
 **Server	 : Apache** 
+
 ----
+
 **Connections to database**
 * Enter your username and password of mySQL database in connect.php
 ```html
