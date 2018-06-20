@@ -378,6 +378,14 @@ $tablename = $username."appointments";
 			padding-bottom: 30px;
 		}
 
+		.inviteeSpanClass{
+			border-style: outset;
+			padding: 5px;
+			font-family: "Trebuchet MS";
+			margin-right: 10px;
+			margin-left: 10px;
+		}
+
 		@media screen and (max-height: 450px) {
 		    .sidenav {
 		    	padding-top: 15px;
@@ -491,8 +499,7 @@ $tablename = $username."appointments";
 					<input id="dateInputId" type="date" name="appDate">
 				</div>
 			</div>
-			<div class="modal-body">
-					
+			<div class="modal-body">		
 					<div><input id="titleInputId" class="inputClass" type="text" name="title" placeholder="Add title"/></div>
 					<div><input id="descInputId" class="inputClass" type="text" name="description" placeholder="Add description"/></div>
 					<div>
@@ -536,6 +543,10 @@ $tablename = $username."appointments";
 		    while(inviteeAppendRegion.firstChild){ //To remove the childs of Invitee username Region
     			inviteeAppendRegion.removeChild(inviteeAppendRegion.firstChild);
 			}
+			document.getElementById("titleInputId").value = "";
+			document.getElementById("titleInputId").placeholder = "Add title";
+			document.getElementById("descInputId").value = "";
+			document.getElementById("descInputId").placeholder = "Add description";
 			document.getElementById("inviteInputId").value = "";
 			document.getElementById("inviteInputId").placeholder = "Username";
 		}
