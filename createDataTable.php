@@ -27,6 +27,7 @@ $sql = "CREATE TABLE IF NOT EXISTS $tableName(
 		Inviter VARCHAR(500),
 		Invitee VARCHAR(500),
 		Status VARCHAR(500),
+		Notification VARCHAR(500),
 		PRIMARY KEY (id,AppointmentDate)
 		)";
 $result = $conn->query($sql);
