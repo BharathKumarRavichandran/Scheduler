@@ -15,6 +15,17 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     $_SESSION['message']="";
     $allow=1;
 
+    $url ='https://www.google.com/recaptcha/api/siteverify';
+    include_once("config.php");//To include $privateKey variable which contains the secret key to Google reCaptacha's API
+
+    $response = file_get_contents($url."?secret=".$privateKey."&response=".$_POST['g-recaptcha-response']."&remoteip=".$_SERVER['REMOTE_ADDR']);
+    $data = json_decode($response);
+
+    if(!((isset($data->success))AND($data->success==true))){
+        $_SESSION['message'] = 'Captcha Failed!';
+        $allow=0;
+    }
+
     $username = $conn->real_escape_string($_POST['username']);
     $email = $_POST['email'];
     $email = filter_var($email, FILTER_SANITIZE_EMAIL);
@@ -98,6 +109,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<title>Sign Up | Scheduler</title>
     <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <style type="text/css">
         
         html,body{
@@ -179,6 +191,12 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             margin-left: 42vw;
         }
 
+        .reCaptchaClass{
+            margin-left: 40.5vw;
+            margin-top: 1vh;
+            margin-bottom: 1vh;   
+        }
+
         #submitIn{
             margin-top: 1%;
             border-radius: 3px;
@@ -237,6 +255,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	    <div><input id="emailIn" type="email" placeholder="Email" name="email" required /></div>
 	    <div><input class="passIn" type="password" placeholder="Password" name="password" required /></div>
 	    <div><input class="passIn" type="password" placeholder="Confirm Password" name="confirmpassword" required /></div>
+        <div class="reCaptchaClass"><div class="g-recaptcha" data-sitekey="6Leo1F8UAAAAAP-J6ZC-lCOSjQ7TgJI6pDgdqsK1"></div></div>
 	    <div><input id="submitIn" type="submit" value="Register" name="register"/></div>
     </form>
     <div class="options">
