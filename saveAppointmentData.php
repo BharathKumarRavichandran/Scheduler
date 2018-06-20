@@ -30,8 +30,9 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 		$toTime = $_POST['appTo'];
 		$inviteeStr = $_POST['inviteeStr'];
 		$status = "Accepted";
+		$notification = "seen";
 
-		$sql = "INSERT INTO $tablename(AppointmentDate,Title,Description,FromTime,ToTime,Inviter,Invitee,Status) "."VALUES ('$appointmentDate','$title','$description','$fromTime','$toTime','$username','$inviteeStr','$status');";
+		$sql = "INSERT INTO $tablename(AppointmentDate,Title,Description,FromTime,ToTime,Inviter,Invitee,Status,Notification) "."VALUES ('$appointmentDate','$title','$description','$fromTime','$toTime','$username','$inviteeStr','$status','$notification');";
 		$result = $conn->query($sql);
 		if (!$result){
 			trigger_error('Invalid query: ' . $conn->error);
@@ -42,8 +43,9 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 		for($i=0;$i<count($invitee)-1;$i++){
 
 			$status ="NYD";//Not Yet Decided
+			$notification = "unseen";
 			$tablename1 = $invitee[$i]."appointments";
-			$sql = "INSERT INTO $tablename1(AppointmentDate,Title,Description,FromTime,ToTime,Inviter,Invitee,Status) "."VALUES ('$appointmentDate','$title','$description','$fromTime','$toTime','$username','$invitee[$i]','$status');";
+			$sql = "INSERT INTO $tablename1(AppointmentDate,Title,Description,FromTime,ToTime,Inviter,Invitee,Status,Notification) "."VALUES ('$appointmentDate','$title','$description','$fromTime','$toTime','$username','$invitee[$i]','$status','$notification');";
 			$result = $conn->query($sql);
 			
 			if (!$result){
