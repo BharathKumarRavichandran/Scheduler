@@ -97,8 +97,8 @@ $_SESSION['message']="";
 			font-family: 'Comic Sans MS';
 			letter-spacing: 0.2em;
 			font-size: 1.2em;
-			margin-left: 80%;
-			margin-top: 8%;
+			margin-left: 74vw;
+			margin-top: 11vh;
 		}
 
 		.userDisplay{
