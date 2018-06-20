@@ -257,7 +257,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	    <div><input id="emailIn" type="email" placeholder="Email" name="email" required /></div>
 	    <div><input class="passIn" type="password" placeholder="Password" name="password" required /></div>
 	    <div><input class="passIn" type="password" placeholder="Confirm Password" name="confirmpassword" required /></div>
-        <div class="reCaptchaClass"><div class="g-recaptcha" data-sitekey="6Leo1F8UAAAAAP-J6ZC-lCOSjQ7TgJI6pDgdqsK1"></div></div>
+        <div class="reCaptchaClass"><div class="g-recaptcha" data-sitekey="Your-public-key"></div></div>
 	    <div><input id="submitIn" type="submit" value="Register" name="register"/></div>
     </form>
     <div class="options">
