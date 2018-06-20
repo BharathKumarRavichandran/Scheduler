@@ -278,7 +278,6 @@ document.getElementById("inviteInputId").addEventListener("keyup",function(event
 
 document.getElementById("inviteeAdd").addEventListener("click",function(event){
 
-	console.log(document.getElementById("inviteInputId").value);
 	if(document.getElementById("inviteInputId").value!=""){
 		newInvitee();
 	}	
