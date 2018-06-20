@@ -122,7 +122,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 			letter-spacing: 0.3em;
 			font-size: 1.1em;
 			margin-left: 46.6vw;
-			width: 7vw;
+			min-width: 7vw;
 		}
 
 		.options{
@@ -141,7 +141,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 			font-family: 'Sofia';
 			letter-spacing: 0.3em;
 			font-size: 1em;
-			width: 7vw;
+			min-width: 7vw;
         }
 
 		#foot{
