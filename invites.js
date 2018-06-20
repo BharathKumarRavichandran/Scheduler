@@ -39,6 +39,31 @@ function getInviteData(){
 
 }
 
+function loadUnseenNotifications(){
+	
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+	  		xmlhttp = new XMLHttpRequest();
+	} 
+	 else{
+	  	xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	var params="";
+	var data;
+	xmlhttp.onreadystatechange = function(){
+	    if(this.readyState==4&&this.status==200){
+	    	data = JSON.parse(this.responseText);	
+	    	for(i=0;i<data.length;i++){
+	    		createNotification(data[i].ID,data[i].AppointmentDate,data[i].FromTime,data[i].ToTime,data[i].Inviter);
+	    	}	
+	    }
+	};
+	xmlhttp.open("POST","getUnseenNotifications.php",true);
+	xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+	xmlhttp.send(params);
+
+}
+
 function createNotification(id,appDate,from,to,inviter){
 
 	var li = document.createElement("li");
@@ -160,3 +185,5 @@ function updateInvite(id,status){
 }
 
 initialise();
+
+setInterval(loadUnseenNotifications,2000);
