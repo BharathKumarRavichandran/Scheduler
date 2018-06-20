@@ -150,6 +150,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         }
 
         #errMsg{
+            overflow: auto;
             background: red;
             margin-top: -10px;
             letter-spacing: 0.1em;
@@ -157,6 +158,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             margin-left: 42.2vw;
             width: 14vw;
             padding: 3px;
+            padding-left: 10px;
             border-radius: 4px;
             margin-bottom: 20px;
         }
@@ -203,8 +205,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             font-family: 'Sofia';
             letter-spacing: 0.3em;
             font-size: 1.1em;
-            margin-left: 45.6vw;
-            width: 7vw;
+            margin-left: 46.4vw;
+            min-width: 7vw;
         }
 
         .options{
@@ -223,7 +225,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             font-family: 'Sofia';
             letter-spacing: 0.3em;
             font-size: 1em;
-            width: 7vw;
+            min-width: 7vw;
         }
 
         #foot{
@@ -250,8 +252,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     <div class="tagline">A web app to create and manage appointments</div>
     <h2 id="registerTitle">Sign Up</h2>
     <form action="register.php" method="post" autocomplete="off">
-    	<div id="errMsg"><?= $_SESSION['message'] ?></div>
-    	<div><input id="usernameIn" type="text" placeholder="Username" name="username" required /></div>
+    	<div id="errMsg"><?= $_SESSION['message'] ?><span id="errMsg1"></span></div>
+    	<div><input id="usernameIn" type="text" placeholder="Username" name="username" onkeyup="usernameAvailabilty(this.value);" onblur="usernameFocusOut();" required /></div>
 	    <div><input id="emailIn" type="email" placeholder="Email" name="email" required /></div>
 	    <div><input class="passIn" type="password" placeholder="Password" name="password" required /></div>
 	    <div><input class="passIn" type="password" placeholder="Confirm Password" name="confirmpassword" required /></div>
@@ -271,6 +273,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         window.location = "login.php";
     }
 
-</script>       
+</script>
+<script src="register.js"></script>       
 </body>
 </html>
