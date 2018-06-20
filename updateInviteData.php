@@ -23,11 +23,9 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 
 	$id = $_POST['id'];
 	$status = $_POST['status'];
+	$notification = "seen";
 
-	$sql = "UPDATE $tablename SET Checked='$checked', TaskText='$taskText', Starred='$starred', EditTime='$editTime' WHERE TaskNumber = $taskNumber;";
-			$result = $conn->query($sql);
-
-	$sql = "UPDATE $tablename SET Status='$status' WHERE id=$id;";
+	$sql = "UPDATE $tablename SET Status='$status', Notification='$notification' WHERE id=$id;";
 	$result = $conn->query($sql);
 
 	if (!$result){
