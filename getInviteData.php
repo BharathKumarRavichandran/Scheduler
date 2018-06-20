@@ -30,7 +30,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 	if($result->num_rows>0){
 		while($row = $result->fetch_assoc()){
 
-			$r = array('ID'=>$row["id"],'AppointmentDate'=>$row["AppointmentDate"],'Title'=>$row["Title"],'Description'=>$row["Description"],'FromTime'=>$row["FromTime"],'ToTime'=>$row["ToTime"],'Inviter'=>$row["Inviter"],'Invitee'=>$row["Invitee"],'Status'=>$row["Status"]);
+			$r = array('ID'=>$row["id"],'AppointmentDate'=>$row["AppointmentDate"],'Title'=>$row["Title"],'Description'=>$row["Description"],'FromTime'=>$row["FromTime"],'ToTime'=>$row["ToTime"],'Inviter'=>$row["Inviter"],'Invitee'=>$row["Invitee"],'Status'=>$row["Status"],'Notification'=>$row['Notification']);
 
 			array_push($userInviteData,$r);	
 		}
