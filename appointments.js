@@ -320,7 +320,11 @@ function addAppointmentDb(appDate,title,desc,from,to){
 	var url="saveAppointmentData.php";
 	var purpose = "add";
 	var params = "appDate="+appDate+"&title="+title+"&description="+desc+"&appFrom="+from+"&appTo="+to+"&inviteeStr="+inviteeStr+"&purpose="+purpose;
-	
+	xmlhttp.onreadystatechange = function(){
+	    if(this.readyState==4&&this.status==200){
+	    	console.log(this.responseText);		
+	    }
+	};
 	xmlhttp.open('POST',url,true);
 	xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 	xmlhttp.send(params);

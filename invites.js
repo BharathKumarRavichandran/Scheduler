@@ -177,7 +177,11 @@ function updateInvite(id,status){
 	}
 	var url="updateInviteData.php";
 	var params = "id="+id+"&status="+status;
-	
+	xmlhttp.onreadystatechange = function(){
+	    if(this.readyState==4&&this.status==200){
+	    	console.log(this.responseText);		
+	    }
+	};
 	xmlhttp.open('POST',url,true);
 	xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 	xmlhttp.send(params);
