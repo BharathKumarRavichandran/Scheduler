@@ -78,9 +78,13 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             include("createDataTable.php");
 
             //insert user data into database
-            $sql = "INSERT INTO $tablename (username,email,password) "."VALUES ('$username','$email','$password')";
-
-            if($conn->query($sql) === true){    
+            $stmt = $conn->prepare("INSERT INTO $tablename (username,email,password) "."VALUES (?,?,?)");
+            if(!$stmt){
+                echo "Error preparing statement ".htmlspecialchars($conn->error);
+            }
+            $stmt->bind_param("sss",$username,$email,$password);
+            
+            if($stmt->execute() === true){    
                 $_SESSION['message'] = "Registration succesful! Added $username to the database!";
                 header("location: home.php");  
     		}
@@ -88,7 +92,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             else{
                	$_SESSION['message'] = 'User could not be added to the database!';
             }
-            
+
+            $stmt->close();
             $conn->close();   
 
     	}
@@ -257,7 +262,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	    <div><input id="emailIn" type="email" placeholder="Email" name="email" required /></div>
 	    <div><input class="passIn" type="password" placeholder="Password" name="password" required /></div>
 	    <div><input class="passIn" type="password" placeholder="Confirm Password" name="confirmpassword" required /></div>
-        <div class="reCaptchaClass"><div class="g-recaptcha" data-sitekey="Your-public-key"></div></div>
+        <div class="reCaptchaClass"><div class="g-recaptcha" data-sitekey="6Leo1F8UAAAAAP-J6ZC-lCOSjQ7TgJI6pDgdqsK1"></div></div>
 	    <div><input id="submitIn" type="submit" value="Register" name="register"/></div>
     </form>
     <div class="options">

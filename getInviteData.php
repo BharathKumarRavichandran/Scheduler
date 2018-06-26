@@ -22,8 +22,16 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 	$sql = "USE Scheduler;";
 	$conn->query($sql);
 
-	$sql = "SELECT * FROM $tablename WHERE Invitee = '$username' AND Status = '$status';";
-	$result = $conn->query($sql);	
+	$notification = "seen";
+
+	$stmt = $conn->prepare("SELECT * FROM $tablename WHERE Invitee = ? AND Status = ? AND Notification = ?;");
+	if(!$stmt){
+		echo "Error preparing statement ".htmlspecialchars($conn->error);
+	}
+	$stmt->bind_param("sss",$username,$status,$notification);
+	$stmt->execute();
+	$result = $stmt->get_result();	
+	$stmt->close();
 
 	$userInviteData = array();
 

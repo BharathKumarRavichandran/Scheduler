@@ -32,8 +32,13 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 		$status = "Accepted";
 		$notification = "seen";
 
-		$sql = "INSERT INTO $tablename(AppointmentDate,Title,Description,FromTime,ToTime,Inviter,Invitee,Status,Notification) "."VALUES ('$appointmentDate','$title','$description','$fromTime','$toTime','$username','$inviteeStr','$status','$notification');";
-		$result = $conn->query($sql);
+		$stmt = $conn->prepare("INSERT INTO $tablename(AppointmentDate,Title,Description,FromTime,ToTime,Inviter,Invitee,Status,Notification) "."VALUES ('$appointmentDate',?,?,'$fromTime','$toTime',?,?,?,?);");
+		if(!$stmt){
+            echo "Error preparing statement ".htmlspecialchars($conn->error);
+        }
+        $stmt->bind_param("ssssss",$title,$description,$username,$inviteeStr,$status,$notification);
+        $stmt->execute();
+		$result = $stmt->get_result();
 		if (!$result){
 			trigger_error('Invalid query: ' . $conn->error);
 		}	
@@ -45,8 +50,13 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 			$status ="NYD";//Not Yet Decided
 			$notification = "unseen";
 			$tablename1 = $invitee[$i]."appointments";
-			$sql = "INSERT INTO $tablename1(AppointmentDate,Title,Description,FromTime,ToTime,Inviter,Invitee,Status,Notification) "."VALUES ('$appointmentDate','$title','$description','$fromTime','$toTime','$username','$invitee[$i]','$status','$notification');";
-			$result = $conn->query($sql);
+			$stmt = $conn->prepare("INSERT INTO $tablename1(AppointmentDate,Title,Description,FromTime,ToTime,Inviter,Invitee,Status,Notification) "."VALUES ('$appointmentDate',?,?,'$fromTime','$toTime',?,?,?,?);");
+			if(!$stmt){
+	            echo "Error preparing statement ".htmlspecialchars($conn->error);
+	        }
+	        $stmt->bind_param("ssssss",$title,$description,$username,$invitee[$i],$status,$notification);
+	        $stmt->execute();
+			$result = $stmt->get_result();
 			
 			if (!$result){
 				trigger_error('Invalid query: ' . $conn->error);

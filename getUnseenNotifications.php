@@ -24,8 +24,14 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 
 	$notification = "unseen";
 
-	$sql = "SELECT * FROM $tablename WHERE Invitee = '$username' AND Status = '$status' AND Notification = '$notification';";
-	$result = $conn->query($sql);	
+	$stmt = $conn->prepare("SELECT * FROM $tablename WHERE Invitee = ? AND Status = ? AND Notification = ?;");
+	if(!$stmt){
+		echo "Error preparing statement ".htmlspecialchars($conn->error);
+	}
+	$stmt->bind_param("sss",$username,$status,$notification);
+	$stmt->execute();
+	$result = $stmt->get_result();	
+	$stmt->close();	
 
 	$userInviteData = array();
 
