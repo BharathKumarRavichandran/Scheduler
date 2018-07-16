@@ -30,7 +30,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 	}
 	$stmt->bind_param("sss",$username,$status,$notification);
 	$stmt->execute();
-	$result = $stmt->get_result();	
+	$result = $stmt->get_result();
 	$stmt->close();
 
 	$userInviteData = array();

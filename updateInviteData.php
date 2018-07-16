@@ -25,17 +25,13 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 	$status = $_POST['status'];
 	$notification = "seen";
 
-	$sql = "UPDATE $tablename SET Status=?, Notification=? WHERE id=?;";
+	$stmt = $conn->prepare("UPDATE $tablename SET Status=?, Notification=? WHERE id=?;");
 	if(!$stmt){
 	    echo "Error preparing statement ".htmlspecialchars($conn->error);
     }
 	$stmt->bind_param("ssi",$status,$notification,$id);
     $stmt->execute();
-	$result = $stmt->get_result();	
-
-	if (!$result){
-		trigger_error('Invalid query: ' . $conn->error);
-	}	
+	$stmt->close();		
 		
 }
 

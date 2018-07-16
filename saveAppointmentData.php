@@ -38,10 +38,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         }
         $stmt->bind_param("ssssss",$title,$description,$username,$inviteeStr,$status,$notification);
         $stmt->execute();
-		$result = $stmt->get_result();
-		if (!$result){
-			trigger_error('Invalid query: ' . $conn->error);
-		}	
+        $stmt->close();	
 
 		$invitee = explode(" ", $inviteeStr);
 
@@ -56,11 +53,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 	        }
 	        $stmt->bind_param("ssssss",$title,$description,$username,$invitee[$i],$status,$notification);
 	        $stmt->execute();
-			$result = $stmt->get_result();
-			
-			if (!$result){
-				trigger_error('Invalid query: ' . $conn->error);
-			}	
+			$stmt->close();
 		}
 
 	}
